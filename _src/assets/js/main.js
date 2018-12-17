@@ -23,6 +23,7 @@ function searchIt(){
       for(let i=0; i<data.length; i++){
         const serie = data[i].show;
         const serieTitle = serie.name;
+        const serieLink = serie.url;
         //si la serie no tiene cartel, metemos una imagen de relleno de placehoder.com
         let serieImage = '';
         if(serie.image){
@@ -43,7 +44,7 @@ function searchIt(){
 
         //Con los resultados, pintar un li con la tarjeta que muestre el cartel y el título de la serie
         li = document.createElement('li');
-        const liContent = `<div class="list-element" id="${serieTitle}"><img class ="list-element-image" src="${serieImage}" alt="cartel promocional de ${serieTitle}"><h2 class="list-element-title">${serieTitle}</h2></div>`;
+        const liContent = `<a class="list-link" href="${serieLink}"><div class="list-element" id="${serieTitle}"><img class ="list-element-image" src="${serieImage}" alt="cartel promocional de ${serieTitle}"><h2 class="list-element-title">${serieTitle}</h2></div></a>`;
         li.innerHTML = liContent;
         listSelector.appendChild(li);
 
