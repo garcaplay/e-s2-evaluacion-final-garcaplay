@@ -23,7 +23,6 @@ function searchIt(){
       for(let i=0; i<data.length; i++){
         const serie = data[i].show;
         const serieTitle = serie.name;
-        findTitle();
         //si la serie no tiene cartel, metemos una imagen de relleno de placehoder.com
         let serieImage = '';
         if(serie.image){
@@ -50,28 +49,25 @@ function searchIt(){
 
         //BUSCAR LA FORMA DE SACAR FUERA DESDE AQUI
         const divSerie = li.querySelector('.list-element');
-
+        let arrayFavorites = JSON.parse(localStorage.getItem('favorites'));
         //intento de hacer lo de localstorage que no funciona
-        function findTitle(){
-          for (let j=0; j<localStorage.length; j++){
-            let miFavorito = localStorage.favorites;
-            console.log(miFavorito);
-            if(serie.name in miFavorito){
+
+        if(arrayFavorites>0){
+          for (let j=0; j<arrayFavorites.length; j++){
+            if(arrayFavorites[j].includes(serieTitle)){
               divSerie.classList.add('favorite-element');
-            } else {
-              console.log('nota')
+              console.log('yes');
             }
           }
         }
+
+
+        //console.log(JSON.parse(localStorage.getItem('favorites'))[0]);
 
         //al hacer click sobre un resultado, cambia el color de fondo y se pone un borde en la tarjeta para marcarlo como 'favorito'
         divSerie.addEventListener('click', favoriteIt);
         //HASTA AQUI
 
-        if(`${serieTitle}` in localStorage){
-          divSerie.classList.add('favorite-element');
-          return ('yes');
-        }
       }
 
     })
@@ -79,7 +75,14 @@ function searchIt(){
 
 }
 
-const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+//En https://www.taniarascia.com/how-to-use-local-storage-with-javascript/ recomiendan hacer este if statement si queremos que se guarde la info de localStorage se mantenga a pesar de cerrar o recargar la página, si pusiéramos let favorites = [] --> siempre empezaríamos con un array vacío en lugar de comprobar si esa info existe ya
+let favorites;
+if (localStorage.getItem('favorites')) {
+  favorites = JSON.parse(localStorage.getItem('favorites'));
+} else {
+  favorites = [];
+}
+console.log(JSON.parse(localStorage.getItem('favorites')));
 
 function favoriteIt(){
   this.classList.toggle('favorite-element');
@@ -87,10 +90,11 @@ function favoriteIt(){
     favorites.push(this.id);
     localStorage.setItem('favorites', JSON.stringify(favorites));
   } else {
-    localStorage.removeItem('favorite');
     favorites.splice(favorites.indexOf(this.id), 1);
+    localStorage.removeItem(favorites[(favorites.indexOf(this.id), 1)]);
   }
   console.log(favorites);
+  console.log(localStorage);
 }
 
 
