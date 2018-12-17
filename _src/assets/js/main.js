@@ -11,6 +11,7 @@ let li = '';
 //nos conectamos al API http://api.tvmaze.com/search/shows?q=${BLABLABLA};
 
 function searchIt(){
+  listSelector.innerHTML = '';
   console.log('pinchaste!')
   fetch(`http://api.tvmaze.com/search/shows?q=${inputSelector.value}`)
   .then(function(response){
@@ -39,6 +40,12 @@ function searchIt(){
       const divSerie = li.querySelector('.list-element');
       function favoriteIt(e){
         this.classList.toggle('favorite-element');
+        //INTENTANDO HACER EL LOCALSTORAGE
+        if (this.classList.contains('favorite-element')){
+        localStorage.setItem('favorite');
+        } else {
+          localStorage.removeItem('favorite');
+        }
       }
 
       divSerie.addEventListener('click', favoriteIt);
@@ -47,12 +54,12 @@ function searchIt(){
     }
 
   })
-
+  .catch(error => console.log(`¡Upsi! Ha sucedido un error: ${error}`));
 
 }
 
-
 btnSelector.addEventListener('click', searchIt);
+
 
 
 
