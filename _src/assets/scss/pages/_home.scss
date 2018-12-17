@@ -51,6 +51,14 @@
   &::-webkit-scrollbar {
     width: 0px;
   }
+  position: relative;
+}
+
+.favorite-btn{
+  position: absolute;
+  right: 0;
+  transform: translateX(50%);
+  font-size: 28px;
 }
 
 .list-element-image{
@@ -60,6 +68,7 @@
 
 .list-link{
   text-decoration: none;
+  color: inherit;
 }
 
 .list-element-title{

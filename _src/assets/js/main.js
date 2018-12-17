@@ -44,12 +44,13 @@ function searchIt(){
 
         //Con los resultados, pintar un li con la tarjeta que muestre el cartel y el título de la serie
         li = document.createElement('li');
-        const liContent = `<a class="list-link" href="${serieLink}"><div class="list-element" id="${serieTitle}"><img class ="list-element-image" src="${serieImage}" alt="cartel promocional de ${serieTitle}"><h2 class="list-element-title">${serieTitle}</h2></div></a>`;
+        const liContent = `<div class="list-element" id="${serieTitle}"><i class="favorite-btn fas fa-star-half"></i><a class="list-link" href="${serieLink}"><img class ="list-element-image" src="${serieImage}" alt="cartel promocional de ${serieTitle}"><h2 class="list-element-title">${serieTitle}</h2></a></div>`;
         li.innerHTML = liContent;
         listSelector.appendChild(li);
 
         //BUSCAR LA FORMA DE SACAR FUERA DESDE AQUI
         const divSerie = li.querySelector('.list-element');
+        const favIcon = li.querySelector('.favorite-btn');
         let arrayFavorites = JSON.parse(localStorage.getItem('favorites'));
         //intento de hacer lo de localstorage que no funciona
 
@@ -66,7 +67,7 @@ function searchIt(){
         //console.log(JSON.parse(localStorage.getItem('favorites'))[0]);
 
         //al hacer click sobre un resultado, cambia el color de fondo y se pone un borde en la tarjeta para marcarlo como 'favorito'
-        divSerie.addEventListener('click', favoriteIt);
+        favIcon.addEventListener('click', favoriteIt);
         //HASTA AQUI
 
       }
@@ -86,7 +87,8 @@ if (localStorage.getItem('favorites')) {
 console.log(JSON.parse(localStorage.getItem('favorites')));
 
 function favoriteIt(){
-  this.classList.toggle('favorite-element');
+  const favElement = this.parentElement;
+  favElement.classList.toggle('favorite-element');
   if (this.classList.contains('favorite-element') && !favorites.includes(this.id)){
     favorites.push(this.id);
     localStorage.setItem('favorites', JSON.stringify(favorites));
