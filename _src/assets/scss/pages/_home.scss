@@ -1,6 +1,5 @@
 .page__main{
   font-family: sans-serif;
-
 }
 .main__searcher{
   text-align: center;
@@ -13,7 +12,7 @@
 .main__searcher-input{
   width: 280px;
   border: 0;
-  box-shadow: 0px 1px 0.2px grey;
+  box-shadow: 0px 1px 0.2px $color-grey;
   height: 24px;
 }
 .main__searcher-btn{
@@ -66,6 +65,6 @@
 }
 
 .favorite-element{
-  background: orange;
-  border: 2px solid deeppink;
+  background: $color-orange;
+  border: 2px solid $color-darkpink;
 }
