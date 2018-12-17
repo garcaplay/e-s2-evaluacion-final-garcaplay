@@ -43,6 +43,10 @@ function searchIt(){
         divSerie.addEventListener('click', favoriteIt);
         //HASTA AQUI
 
+        if(`${serieTitle}` in localStorage){
+          divSerie.classList.add('favorite-element');
+          return ('yes');
+        }
       }
 
     })
@@ -50,12 +54,12 @@ function searchIt(){
 
 }
 
-const favorites = [];
+const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 function favoriteIt(){
   this.classList.toggle('favorite-element');
   //INTENTANDO HACER EL LOCALSTORAGE
-  if (this.classList.contains('favorite-element')){
+  if (this.classList.contains('favorite-element') && !favorites.includes(this.id)){
     favorites.push(this.id);
     localStorage.setItem('favorites', JSON.stringify(favorites));
   } else {
