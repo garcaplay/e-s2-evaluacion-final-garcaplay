@@ -19,15 +19,14 @@ function searchIt(){
 
     })
     .then(function(data){
-
       for(let i=0; i<data.length; i++){
         const serie = data[i].show;
         const serieTitle = serie.name;
         const serieLink = serie.url;
         let serieImage = '';
-        if(serie.image){
+        if (serie.image) {
           serieImage = serie.image.medium;
-        }else{
+        } else {
           serieImage = 'https://via.placeholder.com/210x295/cccccc/666666/?text=TV';
         }
 
@@ -56,13 +55,13 @@ function searchIt(){
         const divSerie = li.querySelector('.list-element');
         const favIcon = li.querySelector('.favorite-btn');
         let arrayFavorites = JSON.parse(localStorage.getItem('favorites'));
+
         //intento de hacer lo de localstorage que no funciona
 
-        if(arrayFavorites>0){
+        if (arrayFavorites.length>0) {
           for (let j=0; j<arrayFavorites.length; j++){
             if(arrayFavorites[j].includes(serieTitle)){
               divSerie.classList.add('favorite-element');
-              console.log('yes');
             }
           }
         }
@@ -93,10 +92,8 @@ function favoriteIt(){
     localStorage.setItem('favorites', JSON.stringify(favorites));
   } else {
     favorites.splice(favorites.indexOf(favElement.id), 1);
-    localStorage.removeItem(favorites[(favorites.indexOf(favElement.id), 1)]);
+    localStorage.setItem('favorites', JSON.stringify(favorites));
   }
-  console.log(favorites);
-  console.log(localStorage);
 }
 
 btnSelector.addEventListener('click', searchIt);
