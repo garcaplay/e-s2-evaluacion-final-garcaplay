@@ -12,16 +12,18 @@ let li = '';
 
 function searchIt(){
   listSelector.innerHTML = '';
-  console.log('pinchaste!');
   fetch(`http://api.tvmaze.com/search/shows?q=${inputSelector.value}`)
     .then(function(response){
+
       return response.json();
+
     })
     .then(function(data){
 
       for(let i=0; i<data.length; i++){
         const serie = data[i].show;
         const serieTitle = serie.name;
+        findTitle();
         //si la serie no tiene cartel, metemos una imagen de relleno de placehoder.com
         let serieImage = '';
         if(serie.image){
@@ -29,6 +31,16 @@ function searchIt(){
         }else{
           serieImage = 'https://via.placeholder.com/210x295/cccccc/666666/?text=TV';
         }
+
+
+        console.log(serie);
+        //Intento de crear mensaje si la búsqueda no da resultado
+        if(data.length === 0){
+          console.log('no hay nada');
+          const message = `<div class="error-message">No hemos encontrado ningún resultado para ${inputSelector.value} :(</div>`;
+          listSelector.appendChild(message);
+        }
+
 
         //Con los resultados, pintar un li con la tarjeta que muestre el cartel y el título de la serie
         li = document.createElement('li');
@@ -38,6 +50,19 @@ function searchIt(){
 
         //BUSCAR LA FORMA DE SACAR FUERA DESDE AQUI
         const divSerie = li.querySelector('.list-element');
+
+        //intento de hacer lo de localstorage que no funciona
+        function findTitle(){
+          for (let j=0; j<localStorage.length; j++){
+            let miFavorito = localStorage.favorites;
+            console.log(miFavorito);
+            if(serie.name in miFavorito){
+              divSerie.classList.add('favorite-element');
+            } else {
+              console.log('nota')
+            }
+          }
+        }
 
         //al hacer click sobre un resultado, cambia el color de fondo y se pone un borde en la tarjeta para marcarlo como 'favorito'
         divSerie.addEventListener('click', favoriteIt);
@@ -58,7 +83,6 @@ const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 function favoriteIt(){
   this.classList.toggle('favorite-element');
-  //INTENTANDO HACER EL LOCALSTORAGE
   if (this.classList.contains('favorite-element') && !favorites.includes(this.id)){
     favorites.push(this.id);
     localStorage.setItem('favorites', JSON.stringify(favorites));
