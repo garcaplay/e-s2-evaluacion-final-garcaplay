@@ -1,20 +1,24 @@
 .page__main{
   font-family: sans-serif;
 }
+
 .main__searcher{
   text-align: center;
   padding: 20px;
 }
+
 .main__searcher-title{
   margin-top: 0;
   font-size: 24px;
 }
+
 .main__searcher-input{
   width: 280px;
   border: 0;
   box-shadow: 0px 1px 0.2px $color-grey;
   height: 24px;
 }
+
 .main__searcher-btn{
   background-color: $color-darkpink;
   color: $color-white;
@@ -22,12 +26,14 @@
   height: 24px;
   width: 60px;
 }
+
 .main__results{
   padding-top: 10px;
   padding-bottom: 10px;
   display: flex;
   justify-content: center;
 }
+
 .main__results-list{
   list-style: none;
   display: grid;
@@ -76,7 +82,6 @@
   font-size: 20px;
   line-height: 18px;
 }
-
 
 .favorite-element{
   background: $color-orange;

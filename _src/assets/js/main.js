@@ -24,7 +24,6 @@ function searchIt(){
         const serie = data[i].show;
         const serieTitle = serie.name;
         const serieLink = serie.url;
-        //si la serie no tiene cartel, metemos una imagen de relleno de placehoder.com
         let serieImage = '';
         if(serie.image){
           serieImage = serie.image.medium;
@@ -32,19 +31,24 @@ function searchIt(){
           serieImage = 'https://via.placeholder.com/210x295/cccccc/666666/?text=TV';
         }
 
-
-        console.log(serie);
         //Intento de crear mensaje si la búsqueda no da resultado
         if(data.length === 0){
           console.log('no hay nada');
-          const message = `<div class="error-message">No hemos encontrado ningún resultado para ${inputSelector.value} :(</div>`;
+          const message = `<div class="error-message">
+            No hemos encontrado ningún resultado para ${inputSelector.value} :(
+            </div>`;
           listSelector.appendChild(message);
         }
+        //
 
-
-        //Con los resultados, pintar un li con la tarjeta que muestre el cartel y el título de la serie
         li = document.createElement('li');
-        const liContent = `<div class="list-element" id="${serieTitle}"><i class="favorite-btn fas fa-star-half"></i><a class="list-link" href="${serieLink}"><img class ="list-element-image" src="${serieImage}" alt="cartel promocional de ${serieTitle}"><h2 class="list-element-title">${serieTitle}</h2></a></div>`;
+        const liContent = `<div class="list-element" id="${serieTitle}">
+          <i class="favorite-btn fas fa-star-half"></i>
+          <a class="list-link" href="${serieLink}">
+          <img class ="list-element-image" src="${serieImage}" alt="cartel promocional de ${serieTitle}">
+          <h2 class="list-element-title">${serieTitle}</h2>
+          </a>
+          </div>`;
         li.innerHTML = liContent;
         listSelector.appendChild(li);
 
@@ -63,10 +67,6 @@ function searchIt(){
           }
         }
 
-
-        //console.log(JSON.parse(localStorage.getItem('favorites'))[0]);
-
-        //al hacer click sobre un resultado, cambia el color de fondo y se pone un borde en la tarjeta para marcarlo como 'favorito'
         favIcon.addEventListener('click', favoriteIt);
         //HASTA AQUI
 
@@ -84,30 +84,19 @@ if (localStorage.getItem('favorites')) {
 } else {
   favorites = [];
 }
-console.log(JSON.parse(localStorage.getItem('favorites')));
 
 function favoriteIt(){
   const favElement = this.parentElement;
   favElement.classList.toggle('favorite-element');
-  if (this.classList.contains('favorite-element') && !favorites.includes(this.id)){
-    favorites.push(this.id);
+  if (favElement.classList.contains('favorite-element') && !favorites.includes(favElement.id)){
+    favorites.push(favElement.id);
     localStorage.setItem('favorites', JSON.stringify(favorites));
   } else {
-    favorites.splice(favorites.indexOf(this.id), 1);
-    localStorage.removeItem(favorites[(favorites.indexOf(this.id), 1)]);
+    favorites.splice(favorites.indexOf(favElement.id), 1);
+    localStorage.removeItem(favorites[(favorites.indexOf(favElement.id), 1)]);
   }
   console.log(favorites);
   console.log(localStorage);
 }
 
-
 btnSelector.addEventListener('click', searchIt);
-
-
-
-//FAVORITO
-
-//almacenamos la info de los favoritos en LocalStorage para que aparezca marcada cuando volvamos a buscar
-
-
-
