@@ -14,41 +14,41 @@ function searchIt(){
   listSelector.innerHTML = '';
   console.log('pinchaste!')
   fetch(`http://api.tvmaze.com/search/shows?q=${inputSelector.value}`)
-  .then(function(response){
-    return response.json();
-  })
-  .then(function(data){
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(data){
 
-    for(let i=0; i<data.length; i++){
-      const serie = data[i].show
-      const serieTitle = serie.name;
-      //si la serie no tiene cartel, metemos una imagen de relleno de placehoder.com
-      let serieImage = '';
-      if(serie.image){
-        serieImage = serie.image.medium;
-      }else{
-        serieImage = 'https://via.placeholder.com/210x295/cccccc/666666/?text=TV';
-      }
+      for(let i=0; i<data.length; i++){
+        const serie = data[i].show
+        const serieTitle = serie.name;
+        //si la serie no tiene cartel, metemos una imagen de relleno de placehoder.com
+        let serieImage = '';
+        if(serie.image){
+          serieImage = serie.image.medium;
+        }else{
+          serieImage = 'https://via.placeholder.com/210x295/cccccc/666666/?text=TV';
+        }
 
-      //Con los resultados, pintar un li con la tarjeta que muestre el cartel y el título de la serie
-      li = document.createElement('li');
-      const liContent = `<div class="list-element"><img src="${serieImage}" alt="cartel promocional de ${serieTitle}"><h2>${serieTitle}</h2></div>`;
-      li.innerHTML = liContent;
-      listSelector.appendChild(li);
+        //Con los resultados, pintar un li con la tarjeta que muestre el cartel y el título de la serie
+        li = document.createElement('li');
+        const liContent = `<div class="list-element"><img class ="list-element-image" src="${serieImage}" alt="cartel promocional de ${serieTitle}"><h2 class="list-element-title">${serieTitle}</h2></div>`;
+        li.innerHTML = liContent;
+        listSelector.appendChild(li);
 
-      //BUSCAR LA FORMA DE SACAR FUERA DESDE AQUI
-      const divSerie = li.querySelector('.list-element');
-      function favoriteIt(e){
-        this.classList.toggle('favorite-element');
-        //INTENTANDO HACER EL LOCALSTORAGE
-        if (this.classList.contains('favorite-element')){
-        localStorage.setItem('favorite');
-        } else {
-          localStorage.removeItem('favorite');
+        //BUSCAR LA FORMA DE SACAR FUERA DESDE AQUI
+        const divSerie = li.querySelector('.list-element');
+        function favoriteIt(e){
+          this.classList.toggle('favorite-element');
+          //INTENTANDO HACER EL LOCALSTORAGE
+          if (this.classList.contains('favorite-element')){
+            localStorage.setItem('favorite');
+          } else {
+            localStorage.removeItem('favorite');
         }
       }
 
-      divSerie.addEventListener('click', favoriteIt);
+        divSerie.addEventListener('click', favoriteIt);
       //HASTA AQUI
 
     }
