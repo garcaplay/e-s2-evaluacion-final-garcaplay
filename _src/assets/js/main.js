@@ -92,3 +92,8 @@ function favoriteIt(){
 }
 
 btnSelector.addEventListener('click', searchIt);
+inputSelector.addEventListener('keyup', function(e){
+  if(e.keyCode === 13){
+    searchIt();
+  }
+});
