@@ -12,11 +12,6 @@ if (localStorage.getItem('favorites')) {
   favorites = [];
 }
 
-//BUSCADOR
-//Al hacer clic sobre el botón de 'Buscar'
-//recogemos el texto del campo de búsqueda y lo metemos a la url de la API
-//nos conectamos al API http://api.tvmaze.com/search/shows?q=${BLABLABLA};
-
 function searchIt(){
   listSelector.innerHTML = '';
   fetch(`http://api.tvmaze.com/search/shows?q=${inputSelector.value}`)
@@ -87,7 +82,6 @@ function favoriteIt(){
   } else {
     favorites.splice(favorites.indexOf(favElement.id), 1);
   }
-  //metemos al key 'favorites' el valor favorites (tras stringifyearlo)
   localStorage.setItem('favorites', JSON.stringify(favorites));
 }
 
