@@ -115,13 +115,15 @@
 .score-number{
    display: inline-block;
    margin: 0;
+   margin-right: 10px;
 
 }
 .score-bar-container{
   background-color: $color-grey;
   display: inline-block;
   height: 20px;
-  width: 200px;
+  width: 180px;
+  margin-left: 10px;
 }
 
 .score-bar{
