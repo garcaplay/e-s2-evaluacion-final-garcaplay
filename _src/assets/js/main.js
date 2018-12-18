@@ -12,11 +12,6 @@ if (localStorage.getItem('favorites')) {
   favorites = [];
 }
 
-//BUSCADOR
-//Al hacer clic sobre el botón de 'Buscar'
-//recogemos el texto del campo de búsqueda y lo metemos a la url de la API
-//nos conectamos al API http://api.tvmaze.com/search/shows?q=${BLABLABLA};
-
 function searchIt(){
   listSelector.innerHTML = '';
   fetch(`http://api.tvmaze.com/search/shows?q=${inputSelector.value}`)
@@ -29,7 +24,9 @@ function searchIt(){
       if(data.length === 0){
         console.log('no hay nada');
         const message = `<div class="error-message">
-          No hemos encontrado ningún resultado para tu búsqueda :(
+          <p>
+          No hemos encontrado ningún resultado para tu búsqueda 😭, pero aquí tienes un unicornio 🦄 !!
+          </p>
           </div>`;
         listSelector.innerHTML = message;
       } else {
@@ -59,7 +56,6 @@ function searchIt(){
 
         }
       }
-
     })
     .catch(error => console.log(`¡Upsi! Ha sucedido un error: ${error}`));
 
