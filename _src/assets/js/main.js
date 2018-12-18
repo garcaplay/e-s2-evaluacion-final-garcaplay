@@ -21,8 +21,8 @@ function searchIt(){
 
     })
     .then(function(data){
+
       if(data.length === 0){
-        console.log('no hay nada');
         const message = `<div class="error-message">
           <p>
           No hemos encontrado ningún resultado para tu búsqueda 😭, pero aquí tienes un unicornio 🦄 !!
@@ -31,10 +31,12 @@ function searchIt(){
         listSelector.innerHTML = message;
       } else {
         for(let i=0; i<data.length; i++){
+
           const serie = data[i].show;
           const serieTitle = serie.name;
           const serieLink = serie.url;
           let serieImage = '';
+
           if (serie.image) {
             serieImage = serie.image.medium;
           } else {
@@ -56,6 +58,7 @@ function searchIt(){
 
         }
       }
+
     })
     .catch(error => console.log(`¡Upsi! Ha sucedido un error: ${error}`));
 
@@ -67,15 +70,19 @@ function favoriteClick(li, serieTitle){
   const favIcon = li.querySelector('.favorite-btn');
 
   for (let j=0; j<favorites.length; j++){
+
     if(favorites[j].includes(serieTitle)){
       divSerie.classList.add('favorite-element');
     }
+
   }
+
   favIcon.addEventListener('click', favoriteIt);
 
 }
 
 function favoriteIt(){
+
   const favElement = this.parentElement;
   favElement.classList.toggle('favorite-element');
   if (favElement.classList.contains('favorite-element') && !favorites.includes(favElement.id)){
@@ -84,11 +91,14 @@ function favoriteIt(){
     favorites.splice(favorites.indexOf(favElement.id), 1);
   }
   localStorage.setItem('favorites', JSON.stringify(favorites));
+
 }
 
 btnSelector.addEventListener('click', searchIt);
 inputSelector.addEventListener('keyup', function(e){
+
   if(e.keyCode === 13){
     searchIt();
   }
+
 });
