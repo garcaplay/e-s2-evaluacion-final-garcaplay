@@ -87,3 +87,18 @@
   background: $color-orange;
   border: 2px solid $color-darkpink;
 }
+
+.error-message{
+border: 2px solid $color-darkpink;
+background-color: $color-darkpinkO;
+color: $color-darkpink;
+font-weight: bold;
+font-size:20px;
+display: flex;
+justify-content: center;
+align-items: center;
+grid-column-start: 2;
+grid-column-end: 4;
+padding-left: 50px;
+padding-right: 50px;
+}

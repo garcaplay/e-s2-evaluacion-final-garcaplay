@@ -24,7 +24,9 @@ function searchIt(){
       if(data.length === 0){
         console.log('no hay nada');
         const message = `<div class="error-message">
-          No hemos encontrado ningún resultado para tu búsqueda :(
+          <p>
+          No hemos encontrado ningún resultado para tu búsqueda 😭, pero aquí tienes un unicornio 🦄 !!
+          </p>
           </div>`;
         listSelector.innerHTML = message;
       } else {
@@ -54,7 +56,6 @@ function searchIt(){
 
         }
       }
-
     })
     .catch(error => console.log(`¡Upsi! Ha sucedido un error: ${error}`));
 
