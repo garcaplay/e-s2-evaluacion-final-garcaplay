@@ -35,6 +35,17 @@ function searchIt(){
           const serie = data[i].show;
           const serieTitle = serie.name;
           const serieLink = serie.url;
+          let serieScore = '';
+
+          if (serie.rating.average === null){
+            serieScore = 'not rated';
+          } else {
+            serieScore = serie.rating.average;
+          }
+
+          const serieScorePercent = (serieScore*10);
+          console.log(serieScorePercent);
+
           let serieImage = '';
 
           if (serie.image) {
@@ -44,15 +55,27 @@ function searchIt(){
           }
 
           li = document.createElement('li');
-          const liContent = `<div class="list-element" id="${serieTitle}">
-            <i class="favorite-btn fas fa-star-half"></i>
-            <a class="list-link" href="${serieLink}">
-            <img class ="list-element-image" src="${serieImage}" alt="cartel promocional de ${serieTitle}">
-            <h2 class="list-element-title">${serieTitle}</h2>
-            </a>
+          const liContent = `
+            <div class="list-element" id="${serieTitle}">
+              <i class="favorite-btn fas fa-star-half"></i>
+              <a class="list-link" href="${serieLink}">
+                <img class ="list-element-image" src="${serieImage}" alt="cartel promocional de ${serieTitle}">
+                <h2 class="list-element-title">${serieTitle}</h2>
+              </a>
+              <div class="list-element-score">
+                <div class="score-bar-container">
+                  <div class="score-bar"></div>
+                </div>
+                <p class="score-number">${serieScore}</p>
+              </div>
             </div>`;
           li.innerHTML = liContent;
           listSelector.appendChild(li);
+          if(serieScore === 'not rated'){
+            li.querySelector('.score-bar').style.width = '0%';
+          }else{
+            li.querySelector('.score-bar').style.width = `${serieScorePercent}%`;
+          }
 
           favoriteClick(li, serieTitle);
 

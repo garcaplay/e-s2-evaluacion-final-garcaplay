@@ -68,7 +68,6 @@
 }
 
 .list-element{
-  box-sizing: border-box;
   background: $color-softpink;
   color: $color-darkpink;
   text-align: center;
@@ -103,6 +102,31 @@
   margin: 10px 0 0;
   font-size: 20px;
   line-height: 18px;
+}
+
+.list-element-score{
+  margin-top: 8px;
+  height: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.score-number{
+   display: inline-block;
+   margin: 0;
+
+}
+.score-bar-container{
+  background-color: $color-grey;
+  display: inline-block;
+  height: 20px;
+  width: 200px;
+}
+
+.score-bar{
+  height: 20px;
+  background-color: $color-darkpink;
 }
 
 .favorite-element{
