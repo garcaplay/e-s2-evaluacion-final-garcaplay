@@ -1,6 +1,6 @@
 
 # Evaluación final Sprint 2
-##Alumna: Silvia García Cacho
+## Alumna: Silvia García Cacho
 
 Esta es la evaluación final del Sprint 2 de [Silvia García Cacho](https://github.com/garcaplay), la cual se basa en una web de búsqueda de series.
 
