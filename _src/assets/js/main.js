@@ -3,6 +3,7 @@
 const inputSelector = document.querySelector('.main__searcher-input');
 const btnSelector = document.querySelector('.main__searcher-btn');
 const listSelector = document.querySelector('.main__results-list');
+const resultsSelector = document.querySelector('.main__results-number');
 let li = '';
 
 let favorites;
@@ -35,6 +36,13 @@ function searchIt(){
           const serie = data[i].show;
           const serieTitle = serie.name;
           const serieLink = serie.url;
+          const days = serie.schedule.days;
+          let serieDays = '';
+
+          for (let i=0; i<days.length; i++){
+            serieDays += `<li class="days">${days[i]}</li>`;
+          }
+          console.log(serieDays);
           let serieScore = '';
 
           if (serie.rating.average === null){
@@ -44,7 +52,6 @@ function searchIt(){
           }
 
           const serieScorePercent = (serieScore*10);
-          console.log(serieScorePercent);
 
           let serieImage = '';
 
@@ -54,6 +61,8 @@ function searchIt(){
             serieImage = 'https://via.placeholder.com/210x295/cccccc/666666/?text=TV';
           }
 
+          resultsSelector.innerHTML = `${data.length}`;
+
           li = document.createElement('li');
           const liContent = `
             <div class="list-element" id="${serieTitle}">
@@ -61,6 +70,7 @@ function searchIt(){
               <a class="list-link" href="${serieLink}">
                 <img class ="list-element-image" src="${serieImage}" alt="cartel promocional de ${serieTitle}">
                 <h2 class="list-element-title">${serieTitle}</h2>
+                <ul class="days-list">${serieDays}</ul>
               </a>
               <div class="list-element-score">
                 <div class="score-bar-container">
@@ -125,3 +135,9 @@ inputSelector.addEventListener('keyup', function(e){
   }
 
 });
+
+function hiddenResults(){
+  listSelector.classList.add('hidden');
+}
+
+resultsSelector.addEventListener('click', hiddenResults);
